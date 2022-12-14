@@ -83,10 +83,8 @@ public class ViewJTable extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         txtDesc = new javax.swing.JTextField();
         txtQtd = new javax.swing.JTextField();
-        txtPreco = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         cbocLocadora = new javax.swing.JComboBox<>();
@@ -104,8 +102,6 @@ public class ViewJTable extends javax.swing.JFrame {
         jLabel1.setText("Modelo");
 
         jLabel2.setText("Ano");
-
-        jLabel3.setText("Reservado");
 
         jButton5.setText("<<  Voltar");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -140,20 +136,16 @@ public class ViewJTable extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(183, 183, 183)
-                                .addComponent(jLabel2)
-                                .addGap(126, 126, 126)
-                                .addComponent(jLabel3)))
+                                .addComponent(jLabel2)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbocLocadora, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(46, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbocLocadora, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,13 +156,11 @@ public class ViewJTable extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtQtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbocLocadora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(62, 62, 62))
         );
@@ -272,7 +262,7 @@ public class ViewJTable extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton3)
@@ -294,16 +284,14 @@ public class ViewJTable extends javax.swing.JFrame {
         CarroDAO dao = new CarroDAO();
 
         c.setModelo(txtDesc.getText());
-        c.setAno(Integer.parseInt(txtQtd.getText()));
-        c.setReservado(txtPreco.getText());
-//        c.setLocadoraID(Integer.parseInt(txtlocadora.getText()));
+        c.setAno(Integer.parseInt(txtQtd.getText()));//       
         c.setLocadoraID(Integer.parseInt(cbocLocadora.getSelectedItem().toString()));
-//        c.setPessoaID(Integer.parseInt(txtpessoa.getText()));
+//       
         dao.create(c);
 
         txtDesc.setText("");
         txtQtd.setText("");
-        txtPreco.setText("");
+//        txtPreco.setText("");
         
         
         readJTable();
@@ -329,7 +317,7 @@ public class ViewJTable extends javax.swing.JFrame {
 
              txtDesc.setText("");
             txtQtd.setText("");
-            txtPreco.setText("");
+//            txtPreco.setText("");
 //            txtlocadora.setText("");
 //            txtpessoa.setText("");
 
@@ -349,8 +337,8 @@ public class ViewJTable extends javax.swing.JFrame {
 
             txtDesc.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 1).toString());
             txtQtd.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 2).toString());
-            txtPreco.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 3).toString());
-//            txtlocadora.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 4).toString());
+//            txtQtd.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 3).toString());
+            cbocLocadora.addItem(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 4).toString());
 //            txtpessoa.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 5).toString());
 
         }
@@ -364,8 +352,8 @@ public class ViewJTable extends javax.swing.JFrame {
 
             txtDesc.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 1).toString());
             txtQtd.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 2).toString());
-            txtPreco.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 3).toString());
-//            txtlocadora.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 4).toString());
+//            txtPreco.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 3).toString());
+            cbocLocadora.addItem(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 4).toString());
 //            txtpessoa.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 5).toString());
 
         }
@@ -382,7 +370,7 @@ public class ViewJTable extends javax.swing.JFrame {
 
             c.setModelo(txtDesc.getText());
             c.setAno(Integer.parseInt(txtQtd.getText()));
-            c.setReservado(txtPreco.getText());
+//            c.setReservado(txtPreco.getText());
             c.setLocadoraID(Integer.parseInt(cbocLocadora.getSelectedItem().toString()));
 //            c.setPessoaID(Integer.parseInt(txtpessoa.getText()));
             c.setId((int) jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 0));
@@ -392,7 +380,7 @@ public class ViewJTable extends javax.swing.JFrame {
 
             txtDesc.setText("");
             txtQtd.setText("");
-            txtPreco.setText("");
+//            txtPreco.setText("");
 //            txtlocadora.setText("");
 //            txtpessoa.setText("");
 
@@ -485,7 +473,6 @@ public class ViewJTable extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
@@ -493,7 +480,6 @@ public class ViewJTable extends javax.swing.JFrame {
     private javax.swing.JTable jTProdutos;
     private javax.swing.JTextField txtBuscaDesc;
     private javax.swing.JTextField txtDesc;
-    private javax.swing.JTextField txtPreco;
     private javax.swing.JTextField txtQtd;
     // End of variables declaration//GEN-END:variables
 }
