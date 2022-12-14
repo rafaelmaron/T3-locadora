@@ -16,6 +16,15 @@ public class Carro {
     private String reservado;
     private int locadoraID;
     private int pessoaID;
+    private int seguroID;
+
+    public int getSeguroID() {
+        return seguroID;
+    }
+
+    public void setSeguroID(int seguroID) {
+        this.seguroID = seguroID;
+    }
 
     public int getId() {
         return id;
@@ -63,5 +72,6 @@ public class Carro {
 
     public void setPessoaID(int pessoaID) {
         this.pessoaID = pessoaID;
-    }    
+    }
+    
 }

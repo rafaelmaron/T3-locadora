@@ -18,23 +18,30 @@ import model.dao.LocadoraDAO;
  *
  * @author Rafael
  */
-public class ViewJTable extends javax.swing.JFrame {
+public class CadastrarCarros extends javax.swing.JFrame {
 
     /**
      * Creates new form ViewJTable
      */
-    public ViewJTable() {
+    public CadastrarCarros() {
         initComponents();
-        DefaultTableModel modelo = (DefaultTableModel) jTProdutos.getModel();
-        jTProdutos.setRowSorter(new TableRowSorter(modelo));
+        DefaultTableModel modelo = (DefaultTableModel) jTCarros.getModel();
+        jTCarros.setRowSorter(new TableRowSorter(modelo));
 
         readJTable();
+        
+        LocadoraDAO dao = new LocadoraDAO();
+        
+        for(Locadora p: dao.read()){
+            cboxLocadora.addItem(p);
+        
+        }
 
     }
 
     public void readJTable() {
         
-        DefaultTableModel modelo = (DefaultTableModel) jTProdutos.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) jTCarros.getModel();
         modelo.setNumRows(0);
         CarroDAO pdao = new CarroDAO();
 
@@ -46,7 +53,8 @@ public class ViewJTable extends javax.swing.JFrame {
                 c.getAno(),
                 c.getReservado(),
                 c.getLocadoraID(),
-                c.getPessoaID()
+                c.getPessoaID(),
+                c.getSeguroID()
             });
 
         }
@@ -54,7 +62,7 @@ public class ViewJTable extends javax.swing.JFrame {
     }
     public void readJTableForDesc(String desc) {
         
-        DefaultTableModel modelo = (DefaultTableModel) jTProdutos.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) jTCarros.getModel();
         modelo.setNumRows(0);
         CarroDAO pdao = new CarroDAO();
 
@@ -66,7 +74,8 @@ public class ViewJTable extends javax.swing.JFrame {
                 c.getAno(),
                 c.getReservado(),
                 c.getLocadoraID(),
-                c.getPessoaID()
+                c.getPessoaID(),               
+                c.getSeguroID()
             });
 
         }
@@ -81,21 +90,24 @@ public class ViewJTable extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        txtDesc = new javax.swing.JTextField();
-        txtQtd = new javax.swing.JTextField();
+        txtModelo = new javax.swing.JTextField();
+        txtAno = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        jbtVoltar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        cbocLocadora = new javax.swing.JComboBox<>();
+        cboxLocadora = new javax.swing.JComboBox<>();
+        txtReservado = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTProdutos = new javax.swing.JTable();
+        jTCarros = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         txtBuscaDesc = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        jbtBuscar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,25 +115,18 @@ public class ViewJTable extends javax.swing.JFrame {
 
         jLabel2.setText("Ano");
 
-        jButton5.setText("<<  Voltar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jbtVoltar.setText("<<  Voltar");
+        jbtVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jbtVoltarActionPerformed(evt);
             }
         });
 
         jLabel6.setText("Selecione a Locadora");
 
-        cbocLocadora.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cbocLocadoraMouseClicked(evt);
-            }
-        });
-        cbocLocadora.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbocLocadoraActionPerformed(evt);
-            }
-        });
+        txtReservado.setEditable(false);
+
+        jLabel3.setText("Encontra-se Reservado? (Para alterar vá para a página Pessoas)");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -130,28 +135,30 @@ public class ViewJTable extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton5)
+                    .addComponent(jbtVoltar)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(183, 183, 183)
                                 .addComponent(jLabel2)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbocLocadora, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))))
-                .addContainerGap(148, Short.MAX_VALUE))
+                            .addComponent(cboxLocadora, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)))
+                    .addComponent(jLabel3)
+                    .addComponent(txtReservado, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(149, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton5)
+                .addComponent(jbtVoltar)
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -159,39 +166,37 @@ public class ViewJTable extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtQtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbocLocadora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(62, 62, 62))
+                    .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboxLocadora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtReservado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jTProdutos.setModel(new javax.swing.table.DefaultTableModel(
+        jTCarros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Modelo", "Ano", "Reservado", "Locadora", "Pessoa"
+                "ID", "Modelo", "Ano", "Reservado", "Locadora", "Pessoa", "Seguro"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jTProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTCarros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTProdutosMouseClicked(evt);
+                jTCarrosMouseClicked(evt);
             }
         });
-        jTProdutos.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTProdutosKeyReleased(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jTProdutos);
+        jScrollPane1.setViewportView(jTCarros);
 
         jButton2.setText("Excluir");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -233,12 +238,14 @@ public class ViewJTable extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Buscar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jbtBuscar.setText("Buscar");
+        jbtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jbtBuscarActionPerformed(evt);
             }
         });
+
+        jLabel4.setText("Filtrar por modelo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -253,21 +260,26 @@ public class ViewJTable extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(192, 192, 192)
-                .addComponent(txtBuscaDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtBuscaDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(44, 44, 44))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton3)
                     .addComponent(txtBuscaDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
+                    .addComponent(jbtBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -279,47 +291,41 @@ public class ViewJTable extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-
+        
+        Locadora locadora = (Locadora) cboxLocadora.getSelectedItem();
+        int aux = locadora.getId();
+        
         Carro c = new Carro();
         CarroDAO dao = new CarroDAO();
 
-        c.setModelo(txtDesc.getText());
-        c.setAno(Integer.parseInt(txtQtd.getText()));//       
-        c.setLocadoraID(Integer.parseInt(cbocLocadora.getSelectedItem().toString()));
-//       
+        c.setModelo(txtModelo.getText());
+        c.setAno(Integer.parseInt(txtAno.getText()));
+        
+        c.setLocadoraID(aux);
+    
         dao.create(c);
 
-        txtDesc.setText("");
-        txtQtd.setText("");
-//        txtPreco.setText("");
-        
-        
+        txtModelo.setText("");
+        txtAno.setText("");
+          
         readJTable();
-
-//        DefaultTableModel dtmProdutos = (DefaultTableModel) jTProdutos.getModel();
-//        Object[] dados = {txtDesc.getText(), txtQtd.getText(), txtPreco.getText()};
-//        dtmProdutos.addRow(dados);
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
 
 //        System.out.println("Linha selecionada: "+jTProdutos.getSelectedRow());
-        if (jTProdutos.getSelectedRow() != -1) {
+        if (jTCarros.getSelectedRow() != -1) {
 
             Carro c = new Carro();
             CarroDAO dao = new CarroDAO();
 
-            c.setId((int) jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 0));
+            c.setId((int) jTCarros.getValueAt(jTCarros.getSelectedRow(), 0));
             
             dao.delete(c);
 
-             txtDesc.setText("");
-            txtQtd.setText("");
-//            txtPreco.setText("");
-//            txtlocadora.setText("");
-//            txtpessoa.setText("");
+            txtModelo.setText("");
+            txtAno.setText("");
 
             readJTable();
 
@@ -330,59 +336,41 @@ public class ViewJTable extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jTProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTProdutosMouseClicked
+    private void jTCarrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTCarrosMouseClicked
         // TODO add your handling code here:
 
-        if (jTProdutos.getSelectedRow() != -1) {
+        if (jTCarros.getSelectedRow() != -1) {
 
-            txtDesc.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 1).toString());
-            txtQtd.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 2).toString());
-//            txtQtd.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 3).toString());
-            cbocLocadora.addItem(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 4).toString());
-//            txtpessoa.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 5).toString());
+            txtModelo.setText(jTCarros.getValueAt(jTCarros.getSelectedRow(), 1).toString());
+            txtAno.setText(jTCarros.getValueAt(jTCarros.getSelectedRow(), 2).toString());
+            txtReservado.setText(jTCarros.getValueAt(jTCarros.getSelectedRow(), 3).toString());
 
         }
 
-    }//GEN-LAST:event_jTProdutosMouseClicked
-
-    private void jTProdutosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTProdutosKeyReleased
-        // TODO add your handling code here:
-
-        if (jTProdutos.getSelectedRow() != -1) {
-
-            txtDesc.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 1).toString());
-            txtQtd.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 2).toString());
-//            txtPreco.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 3).toString());
-            cbocLocadora.addItem(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 4).toString());
-//            txtpessoa.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 5).toString());
-
-        }
-
-    }//GEN-LAST:event_jTProdutosKeyReleased
+    }//GEN-LAST:event_jTCarrosMouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
 
-        if (jTProdutos.getSelectedRow() != -1) {
-
+        if (jTCarros.getSelectedRow() != -1) {
+            
+            Locadora locadora = (Locadora) cboxLocadora.getSelectedItem();
+            int aux = locadora.getId();
+            
             Carro c = new Carro();
             CarroDAO dao = new CarroDAO();
 
-            c.setModelo(txtDesc.getText());
-            c.setAno(Integer.parseInt(txtQtd.getText()));
-//            c.setReservado(txtPreco.getText());
-            c.setLocadoraID(Integer.parseInt(cbocLocadora.getSelectedItem().toString()));
-//            c.setPessoaID(Integer.parseInt(txtpessoa.getText()));
-            c.setId((int) jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 0));
+            c.setModelo(txtModelo.getText());
+            c.setAno(Integer.parseInt(txtAno.getText()));
+            c.setReservado(txtReservado.getText());
+            c.setLocadoraID((aux));
+            c.setId((int) jTCarros.getValueAt(jTCarros.getSelectedRow(), 0));
             
             
             dao.update(c);
 
-            txtDesc.setText("");
-            txtQtd.setText("");
-//            txtPreco.setText("");
-//            txtlocadora.setText("");
-//            txtpessoa.setText("");
+            txtModelo.setText("");
+            txtAno.setText("");
 
             readJTable();
 
@@ -391,42 +379,20 @@ public class ViewJTable extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jbtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtBuscarActionPerformed
         // TODO add your handling code here:
         
         readJTableForDesc(txtBuscaDesc.getText());
         
         
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jbtBuscarActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jbtVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtVoltarActionPerformed
         // TODO add your handling code here:
         
         this.dispose(); 
         new Index().setVisible(true); 
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void cbocLocadoraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbocLocadoraMouseClicked
-        // TODO add your handling code here:
-        
-        Locadora c = new Locadora();
-        LocadoraDAO dao = new LocadoraDAO();
-
-        List<Locadora> locadoras =  dao.read();
-
-        cbocLocadora.removeAllItems();
-        
-        for(Locadora l:locadoras){
-            cbocLocadora.addItem(String.valueOf(l.getId()));
-
-        }
-        
-    }//GEN-LAST:event_cbocLocadoraMouseClicked
-
-    private void cbocLocadoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbocLocadoraActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_cbocLocadoraActionPerformed
+    }//GEN-LAST:event_jbtVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -445,41 +411,46 @@ public class ViewJTable extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewJTable.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastrarCarros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewJTable.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastrarCarros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewJTable.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastrarCarros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewJTable.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastrarCarros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewJTable().setVisible(true);
+                new CadastrarCarros().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cbocLocadora;
+    private javax.swing.JComboBox<Object> cboxLocadora;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTProdutos;
+    private javax.swing.JTable jTCarros;
+    private javax.swing.JButton jbtBuscar;
+    private javax.swing.JButton jbtVoltar;
+    private javax.swing.JTextField txtAno;
     private javax.swing.JTextField txtBuscaDesc;
-    private javax.swing.JTextField txtDesc;
-    private javax.swing.JTextField txtQtd;
+    private javax.swing.JTextField txtModelo;
+    private javax.swing.JTextField txtReservado;
     // End of variables declaration//GEN-END:variables
 }

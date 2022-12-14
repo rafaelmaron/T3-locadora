@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.bean.Pessoa;
+import model.bean.Carro;
 /**
  *
  * @author Rafael

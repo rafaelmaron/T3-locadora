@@ -35,7 +35,6 @@ public class CarroDAO {
             stmt.setInt(2, c.getAno());
             stmt.setString(3, "Não");
             stmt.setInt(4, c.getLocadoraID());
-//          stmt.setInt(5, p.getPessoaID());
 
             stmt.executeUpdate();
 
@@ -71,6 +70,7 @@ public class CarroDAO {
                 carrodados.setReservado(rs.getString("reservado"));
                 carrodados.setLocadoraID(rs.getInt("locadoraID"));
                 carrodados.setPessoaID(rs.getInt("pessoaID"));
+                carrodados.setSeguroID(rs.getInt("seguroID"));
                 carros.add(carrodados);
             }
 
@@ -121,6 +121,43 @@ public class CarroDAO {
 
     }
 
+    public List<Carro> readForDesc2(String desc) {
+
+        Connection con = ConnectionFactory.getConnection();
+        
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        List<Carro> carros = new ArrayList<>();
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM carro WHERE reservado LIKE ?");
+            stmt.setString(1, "%"+desc+"%");
+            
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                Carro carrodados = new Carro();
+                
+                carrodados.setId(rs.getInt("id"));
+                carrodados.setModelo(rs.getString("modelo"));
+                carrodados.setAno(rs.getInt("ano"));
+                carrodados.setReservado(rs.getString("reservado"));
+                carrodados.setLocadoraID(rs.getInt("locadoraID"));
+                carrodados.setPessoaID(rs.getInt("pessoaID"));
+                carros.add(carrodados);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CarroDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+
+        return carros;
+
+    }
     public void update(Carro c) {
 
         Connection con = ConnectionFactory.getConnection();
@@ -129,10 +166,6 @@ public class CarroDAO {
 
         try {
             stmt = con.prepareStatement("UPDATE carro SET modelo = ? ,ano = ?,reservado = ?, locadoraID = ? WHERE id = ?");
-//            stmt.setString(1, p.getModelo());
-//            stmt.setInt(2, p.getAno());
-//            stmt.setString(3, p.getReservado());
-//            stmt.setInt(4, p.getId());
             
             stmt.setString(1, c.getModelo());
             stmt.setInt(2, c.getAno());
@@ -140,6 +173,31 @@ public class CarroDAO {
             stmt.setInt(4, c.getLocadoraID());
             stmt.setInt(5, c.getId());
             
+            stmt.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "Alterações salvas");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao tentar atualizar: " + ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+
+    }
+    
+    public void update2(Carro c) {
+
+        Connection con = ConnectionFactory.getConnection();
+        
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement("UPDATE carro SET pessoaID = ?, reservado = ?, seguroID = ? WHERE id = ?");
+            
+            stmt.setInt(1, c.getPessoaID());
+            stmt.setString(2, "Sim");
+            stmt.setInt(3, c.getSeguroID());
+            stmt.setInt(4, c.getId());
+
             stmt.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Alterações salvas");
