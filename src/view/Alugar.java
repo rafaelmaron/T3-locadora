@@ -13,7 +13,9 @@ import model.dao.CarroDAO;
 import model.bean.Locadora;
 import model.dao.LocadoraDAO;
 import model.bean.Pessoa;
+import model.bean.Seguro;
 import model.dao.PessoaDAO;
+import model.dao.SeguroDAO;
 /**
  *
  * @author Rafael
@@ -21,16 +23,33 @@ import model.dao.PessoaDAO;
 public class Alugar extends javax.swing.JFrame {
     public Alugar() {
         initComponents();
-        DefaultTableModel modelo = (DefaultTableModel) jTProdutos.getModel();
-        jTProdutos.setRowSorter(new TableRowSorter(modelo));
+        DefaultTableModel modelo = (DefaultTableModel) jTCarros.getModel();
+        jTCarros.setRowSorter(new TableRowSorter(modelo));
 
         readJTable();
-
+        
+       
+        
+        PessoaDAO dao = new PessoaDAO();
+        
+        for(Pessoa p: dao.read()){
+            jcboxCliente.addItem(p);
+        
+        }
+        
+        SeguroDAO dao2 = new SeguroDAO();
+        
+        for(Seguro p: dao2.read()){
+            jcboxSeguro.addItem(p);
+        
+        }
+        
+        
     }
 
     public void readJTable() {
         
-        DefaultTableModel modelo = (DefaultTableModel) jTProdutos.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) jTCarros.getModel();
         modelo.setNumRows(0);
         CarroDAO pdao = new CarroDAO();
 
@@ -42,27 +61,31 @@ public class Alugar extends javax.swing.JFrame {
                 c.getAno(),
                 c.getReservado(),
                 c.getLocadoraID(),
-                c.getPessoaID()
+                c.getPessoaID(),
+                c.getSeguroID()
+                    
+                    
             });
-
         }
 
     }
-    public void readJTableForDesc(String desc) {
+    
+     public void readJTableForDesc2(String desc) {
         
-        DefaultTableModel modelo = (DefaultTableModel) jTProdutos.getModel();
-        modelo.setNumRows(0);
+        DefaultTableModel reservado = (DefaultTableModel) jTCarros.getModel();
+        reservado.setNumRows(0);
         CarroDAO pdao = new CarroDAO();
 
-        for (Carro c : pdao.readForDesc(desc)) {
+        for (Carro c : pdao.readForDesc2(desc)) {
 
-            modelo.addRow(new Object[]{
+            reservado.addRow(new Object[]{
                 c.getId(),
                 c.getModelo(),
                 c.getAno(),
                 c.getReservado(),
                 c.getLocadoraID(),
-                c.getPessoaID()
+                c.getPessoaID(),
+                c.getSeguroID()
             });
 
         }
@@ -81,68 +104,72 @@ public class Alugar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jbtVoltar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTProdutos = new javax.swing.JTable();
-        cbocPessoa = new javax.swing.JComboBox<>();
+        jTCarros = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
-        txtDesc = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        txtModelo = new javax.swing.JTextField();
+        jbtAttCliente = new javax.swing.JButton();
+        jcboxCliente = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jbtBuscaReservado = new javax.swing.JButton();
+        txtBuscaRes = new javax.swing.JTextField();
+        jcboxSeguro = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("<< Voltar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbtVoltar.setText("<< Voltar");
+        jbtVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbtVoltarActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Adicionar ao Cliente");
-
-        jTProdutos.setModel(new javax.swing.table.DefaultTableModel(
+        jTCarros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Modelo", "Ano", "Reservado", "Locadora", "Pessoa"
+                "ID", "Modelo", "Ano", "Reservado", "Locadora", "Pessoa", "Seguro"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, false
+                false, false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jTProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTCarros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTProdutosMouseClicked(evt);
+                jTCarrosMouseClicked(evt);
             }
         });
-        jTProdutos.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTProdutosKeyReleased(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jTProdutos);
-
-        cbocPessoa.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cbocPessoaMouseClicked(evt);
-            }
-        });
-        cbocPessoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbocPessoaActionPerformed(evt);
-            }
-        });
+        jScrollPane1.setViewportView(jTCarros);
 
         jLabel4.setText("Carro");
 
-        jButton2.setText("Confirmar");
+        txtModelo.setEditable(false);
+
+        jbtAttCliente.setText("Confirmar");
+        jbtAttCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtAttClienteActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Alugar este Carro para o Cliente:");
+
+        jbtBuscaReservado.setText("Buscar");
+        jbtBuscaReservado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtBuscaReservadoActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Filtrar por status (Reservado: sim e não)");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -151,41 +178,63 @@ public class Alugar extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtDesc, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
-                                .addGap(100, 100, 100)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(cbocPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                    .addComponent(jbtVoltar)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel4))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jLabel3))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addGap(12, 12, 12)
+                                                .addComponent(jcboxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jcboxSeguro, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jbtAttCliente)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtBuscaRes, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbtBuscaReservado)))
+                        .addGap(20, 20, 20))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(jbtVoltar)
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbocPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
-                .addComponent(jButton2)
+                    .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcboxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcboxSeguro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtAttCliente)
+                    .addComponent(txtBuscaRes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtBuscaReservado))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
                 .addGap(58, 58, 58))
         );
 
@@ -193,62 +242,58 @@ public class Alugar extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTProdutosMouseClicked
+    private void jTCarrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTCarrosMouseClicked
         // TODO add your handling code here:
 
-        if (jTProdutos.getSelectedRow() != -1) {
+        if (jTCarros.getSelectedRow() != -1) {
 
-            txtDesc.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 1).toString());
-//            txtQtd.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 2).toString());
-            //            txtPreco.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 3).toString());
-            //            txtlocadora.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 4).toString());
-            //            txtpessoa.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 5).toString());
-
+            txtModelo.setText(jTCarros.getValueAt(jTCarros.getSelectedRow(), 1).toString());   
         }
-    }//GEN-LAST:event_jTProdutosMouseClicked
+    }//GEN-LAST:event_jTCarrosMouseClicked
 
-    private void jTProdutosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTProdutosKeyReleased
-        // TODO add your handling code here:
-
-        if (jTProdutos.getSelectedRow() != -1) {
-
-            txtDesc.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 1).toString());
-//            txtQtd.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 2).toString());
-            //            txtPreco.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 3).toString());
-            //            txtlocadora.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 4).toString());
-            //            txtpessoa.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 5).toString());
-
-        }
-    }//GEN-LAST:event_jTProdutosKeyReleased
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbtVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtVoltarActionPerformed
         // TODO add your handling code here:
         
         this.dispose(); 
         new Index().setVisible(true); 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jbtVoltarActionPerformed
 
-    private void cbocPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbocPessoaActionPerformed
+    private void jbtAttClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtAttClienteActionPerformed
         // TODO add your handling code here:
         
+        Seguro seguro = (Seguro) jcboxSeguro.getSelectedItem();
+        int aux2 = seguro.getId();
         
-    }//GEN-LAST:event_cbocPessoaActionPerformed
-
-    private void cbocPessoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbocPessoaMouseClicked
-        // TODO add your handling code here:
         
-        Pessoa c = new Pessoa();
-        PessoaDAO dao = new PessoaDAO();
-
-        List<Pessoa> pessoas =  dao.read();
-
-        cbocPessoa.removeAllItems();
+        Pessoa pessoa = (Pessoa) jcboxCliente.getSelectedItem();
+        int aux = pessoa.getId();
         
-        for(Pessoa l:pessoas){
-            cbocPessoa.addItem(String.valueOf(l.getNome()));
+        if (jTCarros.getSelectedRow() != -1) {
+
+            Carro c = new Carro();
+            CarroDAO dao = new CarroDAO();     
+            
+            c.setPessoaID(aux);    
+            c.setSeguroID(aux2); 
+            c.setId((int) jTCarros.getValueAt(jTCarros.getSelectedRow(), 0));        
+            
+            dao.update2(c);
+
+            txtModelo.setText("");          
+     
+            readJTable();
 
         }
-    }//GEN-LAST:event_cbocPessoaMouseClicked
+
+
+
+    }//GEN-LAST:event_jbtAttClienteActionPerformed
+
+    private void jbtBuscaReservadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtBuscaReservadoActionPerformed
+        // TODO add your handling code here:
+        
+        readJTableForDesc2(txtBuscaRes.getText());
+    }//GEN-LAST:event_jbtBuscaReservadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -286,13 +331,17 @@ public class Alugar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cbocPessoa;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTProdutos;
-    private javax.swing.JTextField txtDesc;
+    private javax.swing.JTable jTCarros;
+    private javax.swing.JButton jbtAttCliente;
+    private javax.swing.JButton jbtBuscaReservado;
+    private javax.swing.JButton jbtVoltar;
+    private javax.swing.JComboBox<Object> jcboxCliente;
+    private javax.swing.JComboBox<Object> jcboxSeguro;
+    private javax.swing.JTextField txtBuscaRes;
+    private javax.swing.JTextField txtModelo;
     // End of variables declaration//GEN-END:variables
 }

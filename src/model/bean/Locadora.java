@@ -37,5 +37,9 @@ public class Locadora {
         this.endereco = endereco;
     }
     
+    @Override
+    public String toString() {
+        return getCidade();
+    }
     
 }

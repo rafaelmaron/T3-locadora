@@ -22,7 +22,6 @@ import model.bean.Locadora;
  * @author Rafael
  */
 public class LocadoraDAO {
-
     
 
     public List<Locadora> read() {

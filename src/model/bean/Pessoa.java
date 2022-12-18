@@ -47,4 +47,8 @@ public class Pessoa {
         this.endereco = endereco;
     }
     
+    @Override
+    public String toString() {
+        return getNome();
+    }
 }
