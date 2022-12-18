@@ -56,8 +56,8 @@ public class Index extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Locadora de Veiculos");
-        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.SW_RESIZE_CURSOR));
+        jLabel1.setText("Locadora de Veículos");
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

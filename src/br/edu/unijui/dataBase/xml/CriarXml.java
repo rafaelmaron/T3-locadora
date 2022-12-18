@@ -61,12 +61,12 @@ public class CriarXml {
                  
             }
             
-            TransformerFactory transformerFactory = TransformerFactory.newDefaultInstance();
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             
             DOMSource documentoFonte = new DOMSource(documentoXML);
             
-            StreamResult documentoFinal = new StreamResult(new File("C:\\XML\\data.xml"));
+            StreamResult documentoFinal = new StreamResult(new File("./XML/data.xml"));
             
             transformer.transform(documentoFonte, documentoFinal);
                     

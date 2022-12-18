@@ -61,7 +61,9 @@ public class Alugar extends javax.swing.JFrame {
                 c.getAno(),
                 c.getReservado(),
                 c.getLocadoraID(),
+                c.getLocadoraNome(),
                 c.getPessoaID(),
+                c.getPessoaNome(),
                 c.getSeguroID()
                     
                     
@@ -69,7 +71,7 @@ public class Alugar extends javax.swing.JFrame {
         }
 
     }
-    
+   
      public void readJTableForDesc2(String desc) {
         
         DefaultTableModel reservado = (DefaultTableModel) jTCarros.getModel();
@@ -104,6 +106,7 @@ public class Alugar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jbtVoltar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTCarros = new javax.swing.JTable();
@@ -113,9 +116,11 @@ public class Alugar extends javax.swing.JFrame {
         jcboxCliente = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jbtBuscaReservado = new javax.swing.JButton();
-        txtBuscaRes = new javax.swing.JTextField();
         jcboxSeguro = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        jRadioButtonNao = new javax.swing.JRadioButton();
+        jRadioButtonSim = new javax.swing.JRadioButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -131,11 +136,11 @@ public class Alugar extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Modelo", "Ano", "Reservado", "Locadora", "Pessoa", "Seguro"
+                "ID", "Modelo", "Ano", "Reservado", "ID Locadora", "Nome Locad.", "ID Pessoa", "Nome Pessoa", "Seguro"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -169,7 +174,15 @@ public class Alugar extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Filtrar por status (Reservado: sim e não)");
+        jLabel1.setText("Pesquisar por:");
+
+        buttonGroup1.add(jRadioButtonNao);
+        jRadioButtonNao.setText("Carros Disponívies");
+
+        buttonGroup1.add(jRadioButtonSim);
+        jRadioButtonSim.setText("Carros Reservados");
+
+        jLabel2.setText("Selecionar o Seguro");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -178,78 +191,78 @@ public class Alugar extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jbtAttCliente)
+                                .addGap(499, 499, 499)
+                                .addComponent(jRadioButtonSim))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRadioButtonNao)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtBuscaReservado, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jbtVoltar)
+                                    .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel4))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel3))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addGap(12, 12, 12)
-                                                .addComponent(jcboxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jcboxSeguro, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jbtAttCliente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtBuscaRes, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbtBuscaReservado)))
-                        .addGap(20, 20, 20))))
+                                        .addComponent(jLabel3))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addComponent(jcboxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jcboxSeguro, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2)))
+                            .addComponent(jbtVoltar))
+                        .addContainerGap(445, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1)
+                .addGap(6, 6, 6))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jbtVoltar)
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcboxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcboxSeguro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbtAttCliente)
-                    .addComponent(txtBuscaRes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtBuscaReservado))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jbtVoltar)
+                        .addGap(42, 42, 42)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcboxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcboxSeguro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
+                        .addComponent(jbtBuscaReservado, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButtonNao)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jbtAttCliente)
+                            .addComponent(jRadioButtonSim))))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
                 .addGap(58, 58, 58))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTCarrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTCarrosMouseClicked
-        // TODO add your handling code here:
-
-        if (jTCarros.getSelectedRow() != -1) {
-
-            txtModelo.setText(jTCarros.getValueAt(jTCarros.getSelectedRow(), 1).toString());   
-        }
-    }//GEN-LAST:event_jTCarrosMouseClicked
 
     private void jbtVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtVoltarActionPerformed
         // TODO add your handling code here:
@@ -292,8 +305,24 @@ public class Alugar extends javax.swing.JFrame {
     private void jbtBuscaReservadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtBuscaReservadoActionPerformed
         // TODO add your handling code here:
         
-        readJTableForDesc2(txtBuscaRes.getText());
+        
+        if(jRadioButtonNao.isSelected()){
+            readJTableForDesc2("Não");
+        }else if(jRadioButtonSim.isSelected()){
+            readJTableForDesc2("Sim");
+        }
+        
+//        readJTableForDesc2(txtBuscaRes.getText());
     }//GEN-LAST:event_jbtBuscaReservadoActionPerformed
+
+    private void jTCarrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTCarrosMouseClicked
+        // TODO add your handling code here:
+
+        if (jTCarros.getSelectedRow() != -1) {
+
+            txtModelo.setText(jTCarros.getValueAt(jTCarros.getSelectedRow(), 1).toString());
+        }
+    }//GEN-LAST:event_jTCarrosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -331,9 +360,13 @@ public class Alugar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JRadioButton jRadioButtonNao;
+    private javax.swing.JRadioButton jRadioButtonSim;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTCarros;
     private javax.swing.JButton jbtAttCliente;
@@ -341,7 +374,6 @@ public class Alugar extends javax.swing.JFrame {
     private javax.swing.JButton jbtVoltar;
     private javax.swing.JComboBox<Object> jcboxCliente;
     private javax.swing.JComboBox<Object> jcboxSeguro;
-    private javax.swing.JTextField txtBuscaRes;
     private javax.swing.JTextField txtModelo;
     // End of variables declaration//GEN-END:variables
 }

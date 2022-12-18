@@ -47,32 +47,42 @@ public class CarroDAO {
 
     }
 
+   //SELECT * FROM carro JOIN locadora ON locadora.id=carro.locadoraID JOIN pessoa ON pessoa.id=carro.pessoaID
+    
     public List<Carro> read() {
 
         Connection con = ConnectionFactory.getConnection();
         
         PreparedStatement stmt = null;
-        ResultSet rs = null;
+        ResultSet rs = null;       
 
         List<Carro> carros = new ArrayList<>();
-
+//  JOIN pessoa ON pessoa.id=carro.pessoaID
         try {
-            stmt = con.prepareStatement("SELECT * FROM carro");
+            stmt = con.prepareStatement("SELECT * FROM carro JOIN locadora ON locadora.id=carro.locadoraID");
             rs = stmt.executeQuery();
-
-            while (rs.next()) {
-
-                Carro carrodados = new Carro();
+            
+            
+            
+            
+                while (rs.next()) {
+                    
+                 Carro carrodados = new Carro();
 
                 carrodados.setId(rs.getInt("id"));
                 carrodados.setModelo(rs.getString("modelo"));
                 carrodados.setAno(rs.getInt("ano"));
                 carrodados.setReservado(rs.getString("reservado"));
                 carrodados.setLocadoraID(rs.getInt("locadoraID"));
+                carrodados.setLocadoraNome(rs.getString("cidade"));
                 carrodados.setPessoaID(rs.getInt("pessoaID"));
+//              carrodados.setPessoaNome(rs.getString("nome"));
                 carrodados.setSeguroID(rs.getInt("seguroID"));
                 carros.add(carrodados);
-            }
+            }                      
+               
+
+            
 
         } catch (SQLException ex) {
             Logger.getLogger(CarroDAO.class.getName()).log(Level.SEVERE, null, ex);

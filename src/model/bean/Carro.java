@@ -17,7 +17,29 @@ public class Carro {
     private int locadoraID;
     private int pessoaID;
     private int seguroID;
+    private String locadoraNome;
+    private String pessoaNome;
 
+    public String getPessoaNome() {
+        return pessoaNome;
+    }
+
+    public void setPessoaNome(String pessoaNome) {
+        this.pessoaNome = pessoaNome;
+    }
+
+    
+    
+    public String getLocadoraNome() {
+        return locadoraNome;
+    }
+
+    public void setLocadoraNome(String locadoraNome) {
+        this.locadoraNome = locadoraNome;
+    }
+
+    
+    
     public int getSeguroID() {
         return seguroID;
     }

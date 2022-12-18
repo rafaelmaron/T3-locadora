@@ -4,6 +4,7 @@
  */
 package br.edu.unijui.dataBase.xml;
 
+import br.edu.unijui.ConnectionFactory;
 import model.bean.Carro;
 import model.bean.Pessoa;
 import java.io.IOException;
@@ -32,9 +33,6 @@ import view.Index;
  * @author Rafael
  */
 public class InterfaceXml extends javax.swing.JFrame {
-    
-    
-    DataBase db;
 
     /**
      * Creates new form InterfaceXml
@@ -142,15 +140,15 @@ public class InterfaceXml extends javax.swing.JFrame {
             /*Cria um objeto da classe DataBase para estabelecer uma conexão 
               com o banco de dados
              */
-            db = new DataBase();
+
     
             
             ArrayList lista = new ArrayList<RelacaoCarroPessoa>();
             
             //verifica se a conexão foi estabelecida
-            if (db.getConnection() != null) {
+            if (ConnectionFactory.getConnection() != null) {
                 // Instanciando o objeto preparedStatement (pstmt)
-                PreparedStatement pstmt = db.getConnection().prepareStatement("SELECT pessoa.nome, carro.modelo FROM pessoa JOIN carro ON pessoa.id=carro.pessoaID");
+                PreparedStatement pstmt = ConnectionFactory.getConnection().prepareStatement("SELECT pessoa.nome, carro.modelo FROM pessoa JOIN carro ON pessoa.id=carro.pessoaID");
   
                 // Executando a consulta
                 ResultSet resultSet = pstmt.executeQuery();
