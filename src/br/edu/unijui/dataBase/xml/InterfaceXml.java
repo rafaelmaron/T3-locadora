@@ -203,7 +203,7 @@ public class InterfaceXml extends javax.swing.JFrame {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             
-            Document doc = builder.parse("C:\\XML\\data.xml");
+            Document doc = builder.parse("C:./XML/data.xml");
             
             NodeList listaDePessoas = doc.getElementsByTagName("pessoa");
             
